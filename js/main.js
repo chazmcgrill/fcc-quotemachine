@@ -39,7 +39,7 @@ $(document).ready(function() {
 	});
 
 	$('#tweet').click(function() {
-		window.open('https://twitter.com/intent/tweet?hashtags=moviequotes,freecodecamp&text=' + ' "' + tweetData.message + '" ' + tweetData.by);
+		window.open('https://twitter.com/intent/tweet?hashtags=quotes,freecodecamp&text=' + ' "' + tweetData.message + '" ' + tweetData.by);
 	});
 
 });
