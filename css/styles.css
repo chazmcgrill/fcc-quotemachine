@@ -30,14 +30,14 @@ button:hover, a:hover {
 }
 
 .site-content {
-  padding: 50px;
+  padding: 40px 50px;
   width: 240px;
   margin: 100px auto;
   text-align: center;
-  background-color: white;
+  background-color: #d087b7;
   border-radius: 5px;
   box-shadow: 5px;
-  box-shadow: 1px 1px 5px #999999;
+  /*box-shadow: 1px 1px 5px #999999;*/
 }
 
 .button-row {
