@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 	function getQuote(){
 		$.ajax({
-			url:'https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies',
+			url:'https://andruxnet-random-famous-quotes.p.mashape.com/?',
 			type:'POST',
 			dataType:'json',
 
