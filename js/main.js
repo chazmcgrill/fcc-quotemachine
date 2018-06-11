@@ -1,6 +1,14 @@
 $(document).ready(function() {
-	var tweetData = {message: "", by: ""};
-	var errorMessage = {message:"Sorry quote not found!",by:"Please try again."};
+	const API_KEY = 'xnTIYzZLYXmshjuCxRwPNlTTCvsgp1f2MJzjsnCqAgKufLTtpW';
+	const TWT_URL = 'https://twitter.com/intent/tweet?hashtags=quotes,freecodecamp&text=';
+	const ERR_MSG = { msg:"Sorry quote not found!", by:"Please try again." };
+	let tweetData;
+
+	function Tweet(quote, authr) {
+		this.quote = quote;
+		this.authr = authr;
+		this.data = `${TWT_URL}"${quote}" by:${authr}`
+	}
 
 	function getQuote() {
 		$.ajax({
@@ -9,36 +17,40 @@ $(document).ready(function() {
 			dataType:'json',
 
 			success:function(data) {
-				$("#quote").fadeOut(function(){
-					$("#quote").html('&ldquo;' + data[0].quote + '&rdquo;').fadeIn(1000);
+				const QUOTE = data[0].quote;
+				const AUTHR = data[0].author;
+
+				$("#quote").fadeOut(function() {
+					$("#quote").html(`&ldquo;${QUOTE}&rdquo;`).fadeIn(1000);
 				});
-				$("#author").fadeOut(function(){
-					$("#author").html(data[0].author).fadeIn(2000);
+
+				$("#author").fadeOut(function() {
+					$("#author").html(AUTHR).fadeIn(1000);
 				});
-				tweetData.message = data[0].quote;
-				tweetData.by = data[0].author;
+
+				tweetData = new Tweet(QUOTE, AUTHR);
 			},
 
-			error:function(error){
-				$("#quote").html(errorMessage.message);
-				$("#author").html(errorMessage.by);
+			error: function(error) {
+				$("#quote").html(ERR_MSG.msg);
+				$("#author").html(ERR_MSG.by);
 			},
 
-			beforeSend:function(xhr){
-				xhr.setRequestHeader("X-Mashape-Key", "xnTIYzZLYXmshjuCxRwPNlTTCvsgp1f2MJzjsnCqAgKufLTtpW");
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader("X-Mashape-Key", API_KEY);
 			}
 
 		});
-	}
-
-	getQuote();
+	};
 
 	$("#newQuote").click(function() {
 		getQuote();
 	});
 
 	$('#tweet').click(function() {
-		window.open('https://twitter.com/intent/tweet?hashtags=quotes,freecodecamp&text=' + ' "' + tweetData.message + '" ' + tweetData.by);
+		window.open(tweetData.data);
 	});
+
+	getQuote();
 
 });
