@@ -7,6 +7,8 @@ button {
   background: none;
   border: none;
   padding: 20px;
+  cursor: pointer;
+  outline: none
 }
 
 a {
@@ -37,7 +39,6 @@ button:hover, a:hover {
   background-color: #d087b7;
   border-radius: 5px;
   box-shadow: 5px;
-  /*box-shadow: 1px 1px 5px #999999;*/
 }
 
 .button-row {

@@ -1,23 +1,22 @@
-
 $(document).ready(function() {
 	var tweetData = {message: "", by: ""};
 	var errorMessage = {message:"Sorry quote not found!",by:"Please try again."};
 
-	function getQuote(){
+	function getQuote() {
 		$.ajax({
-			url:'https://andruxnet-random-famous-quotes.p.mashape.com/?',
-			type:'POST',
+			url:'https://andruxnet-random-famous-quotes.p.mashape.com/?cat=famous',
+			type:'GET',
 			dataType:'json',
 
-			success:function(data){
+			success:function(data) {
 				$("#quote").fadeOut(function(){
-					$("#quote").html('&ldquo;' + data.quote + '&rdquo;').fadeIn(1000);
+					$("#quote").html('&ldquo;' + data[0].quote + '&rdquo;').fadeIn(1000);
 				});
 				$("#author").fadeOut(function(){
-					$("#author").html(data.author).fadeIn(2000);
+					$("#author").html(data[0].author).fadeIn(2000);
 				});
-				tweetData.message = data.quote;
-				tweetData.by = data.author;
+				tweetData.message = data[0].quote;
+				tweetData.by = data[0].author;
 			},
 
 			error:function(error){
@@ -26,7 +25,7 @@ $(document).ready(function() {
 			},
 
 			beforeSend:function(xhr){
-				xhr.setRequestHeader("X-Mashape-Authorization", "xnTIYzZLYXmshjuCxRwPNlTTCvsgp1f2MJzjsnCqAgKufLTtpW");
+				xhr.setRequestHeader("X-Mashape-Key", "xnTIYzZLYXmshjuCxRwPNlTTCvsgp1f2MJzjsnCqAgKufLTtpW");
 			}
 
 		});
